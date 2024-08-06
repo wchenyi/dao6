@@ -177,6 +177,32 @@ function showFortune(renGong) {
     fortuneDiv.innerHTML = `<strong>单以人宫看吉凶：</strong>${fortune}`;
 }
 
+// 新增：处理导航按钮点击事件
+document.getElementById('announcement-btn').addEventListener('click', function() {
+    document.getElementById('announcement-modal').style.display = 'block';
+});
+
+document.getElementById('learn-btn').addEventListener('click', function() {
+    // 跳转到学习页面
+    window.location.href = 'https://wangcy.cam/cd72ba646fea4e0fb3824581c88a023e';
+});
+
+document.getElementById('donate-btn').addEventListener('click', function() {
+    // 跳转到打赏页面
+    window.location.href = 'https://donate.wangcy.site/';
+});
+
+// 新增：处理模态框关闭
+document.querySelector('.close').addEventListener('click', function() {
+    document.getElementById('announcement-modal').style.display = 'none';
+});
+
+window.addEventListener('click', function(event) {
+    if (event.target == document.getElementById('announcement-modal')) {
+        document.getElementById('announcement-modal').style.display = 'none';
+    }
+});
+
 // 时间起卦选项
 document.getElementById('time-divination').addEventListener('click', () => {
     document.getElementById('time-divination-options').style.display = 'flex';
@@ -338,12 +364,6 @@ themeToggle.addEventListener('click', () => {
 });
 
 // 初始化
-function init() {
-    updateTime();
-    setInterval(updateTime, 1000); // 每秒更新时间
-}
-
-// 页面加载完成后初始化
 function init() {
     updateTime();
     setInterval(updateTime, 1000); // 每秒更新时间
