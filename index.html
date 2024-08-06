@@ -7,6 +7,34 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- 新增：顶部导航栏 -->
+    <nav class="top-nav">
+        <div class="nav-buttons">
+            <button class="nav-button" id="announcement-btn">公告</button>
+            <button class="nav-button" id="learn-btn">学习</button>
+            <button class="nav-button" id="donate-btn">打赏</button>
+        </div>
+    </nav>
+
+    <!-- 新增：公告弹窗 -->
+    <div id="announcement-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <!-- 在这里添加公告内容 -->
+            <h2>📢公告</h2>
+            <p>这里是Wangcy制作的道家小六壬起卦网站，目前还在开发中，下面是基本功能和注意事项：</p>
+            <p>1️⃣时间起卦：<b>农历月日时起卦</b>和<b>时刻分起卦</b>（暂时有bug❗）</p>
+            <p>2️⃣数字起卦：<b>自选数字起卦</b>和<b>随机数字起卦</b>（正常可用✔️）</p>
+            <p>3️⃣自选起卦：自己输入三宫（正常可用✔️）</p>
+            <p>4️⃣道家小刘知识学习：提供资料、案例、分析交流</p>
+            <p><b>🎁计划增加</b></p>
+            <p>1️⃣八卦具象</p>
+            <p>2️⃣三宫具象</p>
+            <p>3️⃣转太极</p>
+            <p>🧩欢迎你的建议……</p>
+        </div>
+    </div>
+
     <div class="container">
         <h1>道家小六壬起卦</h1>
         <button id="theme-toggle" class="theme-toggle">🌙</button>
