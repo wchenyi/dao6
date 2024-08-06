@@ -7,6 +7,12 @@
     --header-bg: #444444;
     --header-text: #ffffff;
     --main-method-bg: #1E90FF;
+    --nav-bg: #f8f8f8;
+    --nav-button-bg: #ffffff;
+    --nav-button-text: #1E90FF;
+    --nav-button-border: #1E90FF;
+    --modal-bg: #ffffff;
+    --modal-text: #333333;
 }
 
 .dark-mode {
@@ -18,6 +24,12 @@
     --header-bg: #666666;
     --header-text: #ffffff;
     --main-method-bg: #0066CC;
+    --nav-bg: #222222;
+    --nav-button-bg: #333333;
+    --nav-button-text: #1E90FF;
+    --nav-button-border: #1E90FF;
+    --modal-bg: #333333;
+    --modal-text: #ffffff;
 }
 
 body {
@@ -25,13 +37,87 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
-    padding: 20px;
+    padding: 0;
+    margin: 0;
     transition: background-color 0.3s, color 0.3s;
+}
+
+.top-nav {
+    background-color: var(--nav-bg);
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.nav-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-button {
+    background-color: var(--nav-button-bg);
+    color: var(--nav-button-text);
+    border: 2px solid var(--nav-button-border);
+    padding: 6px 12px;
+    margin: 0 15px;/* 调整顶部栏三个选项间隔大小 */
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 14px;
+}
+
+.nav-button:hover {
+    background-color: var(--nav-button-text);
+    color: var(--nav-button-bg);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: var(--modal-bg);
+    color: var(--modal-text);
+    margin: 15% auto; /* 调整为 15%，使桌面端弹窗位置更高 */
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%; /* 调整为 80%，使桌面端弹窗更窄 */
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .container {
     max-width: 800px;
-    margin: 0 auto;
+    margin: 130px auto 20px; /* 增加顶部边距，为固定定位的顶部导航栏留出空间 */
     padding: 20px;
     background-color: var(--bg-color);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -115,15 +201,15 @@ input[type="number"], input[type="text"] {
 }
 
 .theme-toggle {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+    position: fixed; /* 改为固定定位 */
+    top: 60px; /* 调整深色切换高度位置 */
+    right: 20px; /* 调整位置 */
     background: none;
     border: none;
     font-size: 24px;
     cursor: pointer;
     padding: 5px;
-    z-index: 1000;
+    z-index: 1001; /* 确保在顶部导航栏之上 */
 }
 
 .divination-methods {
@@ -177,6 +263,7 @@ input[type="number"], input[type="text"] {
 @media (max-width: 600px) {
     .container {
         padding: 10px;
+        margin-top: 90px;/* 调整【移动端】顶部栏和下面内容的间隔 */
     }
     
     button {
@@ -186,8 +273,8 @@ input[type="number"], input[type="text"] {
 
     .theme-toggle {
         font-size: 20px;
-        top: 5px;
-        right: 5px;
+        top: 40px; /* 顶部栏与下面内容之间——神色模式切换按钮的位置 */
+        right: 0px;
     }
 
     input[type="number"], input[type="text"] {
@@ -202,5 +289,22 @@ input[type="number"], input[type="text"] {
     .divination-methods button, #time-divination-options button, #number-input button {
         width: 100%;
         margin: 5px 0;
+    }
+
+    .nav-buttons {
+        flex-direction: row; /* 保持水平排列 */
+        justify-content: space-between;
+    }
+
+    .nav-button {
+        padding: 4px 8px;
+        font-size: 12px;
+        margin: 0 8px; /* Increased margin for better spacing on mobile */
+    }
+
+    .modal-content {
+        width: 90%;
+        margin: 20% auto; /* 调整为 20%，使移动端弹窗位置稍低 */
+        padding: 15px;
     }
 }
