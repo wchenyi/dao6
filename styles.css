@@ -64,7 +64,7 @@ body {
     color: var(--nav-button-text);
     border: 2px solid var(--nav-button-border);
     padding: 6px 12px;
-    margin: 0 15px;/* 调整顶部栏三个选项间隔大小 */
+    margin: 0 15px;
     border-radius: 12px;
     font-weight: bold;
     cursor: pointer;
@@ -92,10 +92,10 @@ body {
 .modal-content {
     background-color: var(--modal-bg);
     color: var(--modal-text);
-    margin: 15% auto; /* 调整为 15%，使桌面端弹窗位置更高 */
+    margin: 15% auto;
     padding: 20px;
     border-radius: 10px;
-    width: 80%; /* 调整为 80%，使桌面端弹窗更窄 */
+    width: 80%;
     max-width: 500px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -117,7 +117,7 @@ body {
 
 .container {
     max-width: 800px;
-    margin: 130px auto 20px; /* 增加顶部边距，为固定定位的顶部导航栏留出空间 */
+    margin: 130px auto 20px;
     padding: 20px;
     background-color: var(--bg-color);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -201,15 +201,15 @@ input[type="number"], input[type="text"] {
 }
 
 .theme-toggle {
-    position: fixed; /* 改为固定定位 */
-    top: 60px; /* 调整深色切换高度位置 */
-    right: 20px; /* 调整位置 */
+    position: fixed;
+    top: 60px;
+    right: 20px;
     background: none;
     border: none;
     font-size: 24px;
     cursor: pointer;
     padding: 5px;
-    z-index: 1001; /* 确保在顶部导航栏之上 */
+    z-index: 1001;
 }
 
 .divination-methods {
@@ -260,10 +260,71 @@ input[type="number"], input[type="text"] {
     background-color: #FF8C00;
 }
 
+.bagua-info {
+    background-color: var(--result-bg);
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+.bagua-lines {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.bagua-line {
+    font-size: 24px;
+    line-height: 1.2;
+    font-weight: bold;
+}
+
+.bagua-line.阳 {
+    color: #FF4500;
+}
+
+.bagua-line.阴 {
+    color: #1E90FF;
+}
+
+/* 调整八卦具象显示效果 */
+.bagua-symbol {  
+    font-size: 18px;
+    text-align: left;
+    margin: 10px 0;
+    font-weight: bold;
+    color: inherit; /* 使用继承的颜色，而不是在 JavaScript 中设置 */
+}
+
+/* 为八卦符号单独设置样式 */
+.bagua-symbol::first-letter {
+    font-size: 20px; /* 保持八卦符号较大 */
+    vertical-align: middle;
+}
+
+.bagua-name {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.bagua-meaning {
+    font-size: 14px;
+    text-align: justify;
+}
+
+.centered-text {
+    text-align: center;
+    margin: 15px 0;
+    font-weight: bold;
+}
+
 @media (max-width: 600px) {
     .container {
         padding: 10px;
-        margin-top: 90px;/* 调整【移动端】顶部栏和下面内容的间隔 */
+        margin-top: 90px;
     }
     
     button {
@@ -273,7 +334,7 @@ input[type="number"], input[type="text"] {
 
     .theme-toggle {
         font-size: 20px;
-        top: 40px; /* 顶部栏与下面内容之间——神色模式切换按钮的位置 */
+        top: 40px;
         right: 0px;
     }
 
@@ -292,19 +353,21 @@ input[type="number"], input[type="text"] {
     }
 
     .nav-buttons {
-        flex-direction: row; /* 保持水平排列 */
+        flex-direction: row;
         justify-content: space-between;
     }
 
     .nav-button {
         padding: 4px 8px;
         font-size: 12px;
-        margin: 0 8px; /* Increased margin for better spacing on mobile */
+        margin: 0 8px;
     }
 
     .modal-content {
         width: 90%;
-        margin: 20% auto; /* 调整为 20%，使移动端弹窗位置稍低 */
+        margin: 20% auto;
         padding: 15px;
     }
+
+
 }
