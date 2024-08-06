@@ -33,6 +33,18 @@ const wuxingRelations = {
     '土': { '金': '生出', '水': '克出', '土': '同', '火': '被生', '木': '被克' }
 };
 
+// 定义八卦及其属性
+const bagua = {
+    '☰': { name: '乾卦', attribute: '【阳-金】', color: 'gold', meaning: '五行属金，方位为西北，人物为老年男性或当官的。为46岁以上男性 天、父、老人、官贵、头、骨、马、金、宝珠、玉、木果、圆物、冠、镜、刚物、大赤色、水寒。' },
+    '☱': { name: '兑卦', attribute: '【阴-金】', color: 'gold', meaning: '五行属金，方位为西方，人物为小女儿或少女。为1-15岁女性 泽、少女、巫、舌、妾、肺、羊、毁抓之物、带口之器、属金者、 废缺之物、奴仆婢。' },
+    '☲': { name: '离卦', attribute: '【阳-火】', color: 'red', meaning: '五行属火，方位南方，人物为二女儿或中年女性。为16-30岁女性，也可以代表中层干部。 火、雉、日、目、电、霓、中女、甲胄、戈兵、文书、槁木、炉、鼍、龟、 蟹、蚌、凡有壳之物、 红赤紫色、花、文人、干燥物。' },
+    '☳': { name: '震卦', attribute: '【阳-木】', color: 'green', meaning: '五行属木，方位为东方，人物为大儿子、军警人员。为31-45岁男性 雷、长男、足、发、龙、百虫、蹄、竹、萑苇、马鸣、母足、颡、稼、乐器之类、草木、青碧绿色、 树、木核、柴、蛇。' },
+    '☴': { name: '巽卦', attribute: '【阳-木】', color: 'green', meaning: '五行属木，方位东南，人物为大女儿或大儿媳妇。为31-45岁女性，在家中没有老年妇女的情况下也可以代表女主人。 风、长女、僧尼、鸡、股、百禽、百草、香气、臭、绳、眼、羽毛、帆、扇、枝叶之类、仙道、工 匠、直物、工巧之器。' },
+    '☵': { name: '坎卦', attribute: '【阳-水】', color: 'blue', meaning: '五行属水，方位北方，人物为二儿子或中年男性。为16-30岁男性，也可以代表中层干部。 水、雨雪、工、猪、中男、沟渎、弓轮、耳、血、月、盗、宫律、栋、丛棘、狐、蒺藜、桎梏、水 族、鱼、盐、酒醢、有核之物、黑色。' },
+    '☶': { name: '艮卦', attribute: '【阴-土】', color: 'brown', meaning: '五行属土，方位东北，人物为小儿子或少年男性。为1-15岁男性，也可以代表员工、小人。 山、土、少男、童子、狗、手、指、径路、门阙、菝阍、寺、鼠、虎、黔喙之属、木生之物、藤生 之瓜、鼻。' },
+    '☷': { name: '坤卦', attribute: '【阳-土】', color: 'brown', meaning: '五行属土，方位为西南，人物为老年妇女或女主人。为46岁以上的女性 地、母、老妇、土、牛、釜、布帛、文章、舆、方物、柄、黄色、瓦器、腹、裳、黑色、黍稷、书、 米、谷。' }
+};
+
 // 更新当前时间和农历时间
 function updateTime() {
     const now = new Date();
@@ -91,7 +103,24 @@ function showResult(result, method, numbers) {
     showRelations(result, shichen);
     showFortune(result.renGong.name);
 
+    // 清空之前的宫位详情和八卦具象
+    document.getElementById('gong-details').innerHTML = '';
+    const existingBaguaInfo = document.querySelector('.bagua-info');
+    if (existingBaguaInfo) {
+        existingBaguaInfo.remove();
+    }
+
+    // 显示宫位详情
+    showGongDetails(result.tianGong.name);
+    showGongDetails(result.diGong.name);
+    showGongDetails(result.renGong.name);
+
+    // 生成并显示新的八卦信息
+    const baguaResult = generateBagua(result);
+    showBaguaInfo(baguaResult, result);
+
     document.getElementById('result').style.display = 'block';
+    document.getElementById('gong-details').style.display = 'block';
     document.getElementById('restart').style.display = 'block';
 }
 
@@ -176,6 +205,69 @@ function showFortune(renGong) {
     }
     fortuneDiv.innerHTML = `<strong>单以人宫看吉凶：</strong>${fortune}`;
 }
+
+// 根据起卦结果生成八卦
+function generateBagua(result) {
+    const yinYangMap = {
+        '大安': '阳', '速喜': '阳', '小吉': '阳',
+        '留连': '阴', '赤口': '阴', '空亡': '阴'
+    };
+    
+    const yinYangPattern = [
+        yinYangMap[result.tianGong.name],
+        yinYangMap[result.diGong.name],
+        yinYangMap[result.renGong.name]
+    ];
+    
+    const baguaMap = {
+        '阳阳阳': '☰', '阴阳阳': '☱', '阳阴阳': '☲', '阴阴阳': '☳',
+        '阳阳阴': '☴', '阴阳阴': '☵', '阳阴阴': '☶', '阴阴阴': '☷'
+    };
+
+    return {
+        yinYangPattern: yinYangPattern,
+        baguaSymbol: baguaMap[yinYangPattern.join('')]
+    };
+}
+
+// 显示八卦信息
+function showBaguaInfo(baguaResult, result) {
+    const baguaInfo = bagua[baguaResult.baguaSymbol];
+    const baguaDiv = document.createElement('div');
+    baguaDiv.className = 'bagua-info';
+    baguaDiv.innerHTML = `
+        <h3>八卦具象</h3>
+        <div class="bagua-lines">
+            ${baguaResult.yinYangPattern.map((line, index) => 
+                `<div class="bagua-line ${line}">
+                    ${line === '阳' ? '—' : '--'} 
+                    <span class="gong-name">${index === 0 ? '天宫' : index === 1 ? '地宫' : '人宫'}: 
+                    ${[result.tianGong.name, result.diGong.name, result.renGong.name][index]}</span>
+                </div>`
+            ).join('')}
+        </div>
+        <p class="bagua-symbol" style="color: ${baguaInfo.color};">${baguaResult.baguaSymbol}：${baguaInfo.name}${baguaInfo.attribute}</p>
+        <p class="bagua-meaning">${baguaInfo.meaning}</p>
+    `;
+    document.getElementById('result').appendChild(baguaDiv);
+}
+
+// 显示宫位详情
+function showGongDetails(gongName) {
+    const gongInfoDiv = document.createElement('div');
+    gongInfoDiv.innerHTML = `<h4 style="color: ${gongs.find(gong => gong.name === gongName).color};">${gongName}</h4><p>${gongDetails[gongName]}</p>`;
+    document.getElementById('gong-details').appendChild(gongInfoDiv);
+}
+
+// 六宫详细信息
+const gongDetails = {
+    '大安': '数字为1、7；4、5。干支方位归类为东方，以季节论属于春季，地支月份为寅卯辰月，天干为甲乙木。藏干为甲丁。十二宫为事业宫，同时也为命宫。事业宫主外为动态宫，命宫在内为静态宫。',
+    '留连': '数字为2、8；7、8。干支方位归类为东南方，暗藏西南、东北、西北三角，以季节论为春夏，地支月份为辰巳月。藏干为丁己。田宅宫，同时也为奴仆宫。田宅宫表现在外，为置田购房，安家立业； 奴仆宫表现在内，为占有欲、支配欲，有阴暗、淫私之意。',
+    '速喜': '数字为3、9；6、9。干支方位归类为南方，以季节论属于长夏，地支月份为巳午未月，天干为丙丁火。藏干为丙辛。感情宫，同时也为夫妻宫，或为婚姻宫。',
+    '赤口': '数字为4、10；1、2。干支方位归类为西方，以季节论属于秋季，地支月份为申酉戍月，天干为庚辛金。藏干为庚癸。疾厄宫，同时也为兄弟宫。在这里，兄弟宫并不单指兄弟姐妹，同时还包括朋友和同事或合伙人，这些人与你为比劫关系，劫有伤害之意，对应疾厄宫之理，所以，疾厄宫暗藏兄弟宫，当然，兄弟宫并非完全只坏不好，只是在这里是指这些兄弟朋友给你带来的伤害。疾厄宫为动态宫，表示外在所影响或带来的疾病与灾祸；兄弟宫为静态宫，表示内在人际关系的处理。',
+    '小吉': '数字为5、11；3、8。干支方位归类为北方，以季节论属于冬季，地支月份为亥子丑月，天干为壬癸水。藏干为壬甲。为驿马宫，同时也为子女宫。',
+    '空亡': '数字为6、12；5、10。干支方位归类为中央，以季节论属于冬春，地支月份为丑寅月，天干为戊已土。藏干为戊乙。福德宫，同时也是父母宫。'
+};
 
 // 新增：处理导航按钮点击事件
 document.getElementById('announcement-btn').addEventListener('click', function() {
@@ -330,30 +422,6 @@ document.getElementById('restart').addEventListener('click', () => {
     document.getElementById('number-input').style.display = 'none';
     document.getElementById('custom-number-input').style.display = 'none';
     document.getElementById('custom-gong-input').style.display = 'none';
-});
-
-// 显示六宫详细信息
-const gongDetails = {
-    '大安': '数字为1、7；4、5。干支方位归类为东方，以季节论属于春季，地支月份为寅卯辰月，天干为甲乙木。藏干为甲丁。十二宫为事业宫，同时也为命宫。事业宫主外为动态宫，命宫在内为静态宫。',
-    '留连': '数字为2、8；7、8。干支方位归类为东南方，暗藏西南、东北、西北三角，以季节论为春夏，地支月份为辰巳月。藏干为丁己。田宅宫，同时也为奴仆宫。田宅宫表现在外，为置田购房，安家立业； 奴仆宫表现在内，为占有欲、支配欲，有阴暗、淫私之意。',
-    '速喜': '数字为3、9；6、9。干支方位归类为南方，以季节论属于长夏，地支月份为巳午未月，天干为丙丁火。藏干为丙辛。感情宫，同时也为夫妻宫，或为婚姻宫。',
-    '赤口': '数字为4、10；1、2。干支方位归类为西方，以季节论属于秋季，地支月份为申酉戍月，天干为庚辛金。藏干为庚癸。疾厄宫，同时也为兄弟宫。在这里，兄弟宫并不单指兄弟姐妹，同时还包括朋友和同事或合伙人，这些人与你为比劫关系，劫有伤害之意，对应疾厄宫之理，所以，疾厄宫暗藏兄弟宫，当然，兄弟宫并非完全只坏不好，只是在这里是指这些兄弟朋友给你带来的伤害。疾厄宫为动态宫，表示外在所影响或带来的疾病与灾祸；兄弟宫为静态宫，表示内在人际关系的处理。',
-    '小吉': '数字为5、11；3、8。干支方位归类为北方，以季节论属于冬季，地支月份为亥子丑月，天干为壬癸水。藏干为壬甲。为驿马宫，同时也为子女宫。',
-    '空亡': '数字为6、12；5、10。干支方位归类为中央，以季节论属于冬春，地支月份为丑寅月，天干为戊已土。藏干为戊乙。福德宫，同时也是父母宫。'
-};
-
-function showGongDetails(gongName) {
-    const gongInfoDiv = document.getElementById('gong-info');
-    gongInfoDiv.innerHTML = `<h4 style="color: ${gongs.find(gong => gong.name === gongName).color};">${gongName}</h4><p>${gongDetails[gongName]}</p>`;
-    document.getElementById('gong-details').style.display = 'block';
-}
-
-// 为每个宫位添加点击事件
-document.querySelectorAll('.gong').forEach(gong => {
-    gong.addEventListener('click', (e) => {
-        const gongName = e.target.textContent;
-        showGongDetails(gongName);
-    });
 });
 
 // 深色模式切换
