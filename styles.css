@@ -1,0 +1,206 @@
+:root {
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --button-bg: #4CAF50;
+    --button-text: #ffffff;
+    --result-bg: #f0f0f0;
+    --header-bg: #444444;
+    --header-text: #ffffff;
+    --main-method-bg: #1E90FF;
+}
+
+.dark-mode {
+    --bg-color: #333333;
+    --text-color: #ffffff;
+    --button-bg: #45a049;
+    --button-text: #ffffff;
+    --result-bg: #4a4a4a;
+    --header-bg: #666666;
+    --header-text: #ffffff;
+    --main-method-bg: #0066CC;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--bg-color);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    position: relative;
+}
+
+h1, h2, h3 {
+    text-align: center;
+}
+
+button {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.main-method {
+    background-color: var(--main-method-bg);
+}
+
+input[type="number"], input[type="text"] {
+    width: calc(33.33% - 10px);
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+#result, #gong-details {
+    background-color: var(--result-bg);
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+.result-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.result-header {
+    background-color: var(--header-bg);
+    color: var(--header-text);
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.gong {
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+}
+
+.gong[data-name="大安"] { background-color: #4CAF50; }
+.gong[data-name="留连"], .gong[data-name="空亡"] { background-color: #8B4513; }
+.gong[data-name="速喜"] { background-color: #FF4500; }
+.gong[data-name="赤口"] { background-color: #FFD700; color: black; }
+.gong[data-name="小吉"] { background-color: #1E90FF; }
+
+#shi-chen {
+    text-align: center;
+    font-weight: bold;
+}
+
+.theme-toggle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 1000;
+}
+
+.divination-methods {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.divination-methods button {
+    flex: 1;
+    margin: 0 5px;
+}
+
+#time-divination-options, #number-input, #custom-gong-input {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+#time-divination-options button, #number-input button {
+    width: 48%;
+}
+
+#custom-number-input {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#custom-number-submit, #custom-gong-submit {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.restart-button {
+    background-color: #FFA500;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.restart-button:hover {
+    background-color: #FF8C00;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+    
+    button {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    .theme-toggle {
+        font-size: 20px;
+        top: 5px;
+        right: 5px;
+    }
+
+    input[type="number"], input[type="text"] {
+        width: calc(33.33% - 6px);
+        margin: 3px;
+    }
+
+    .divination-methods, #time-divination-options, #number-input {
+        flex-direction: column;
+    }
+
+    .divination-methods button, #time-divination-options button, #number-input button {
+        width: 100%;
+        margin: 5px 0;
+    }
+}
