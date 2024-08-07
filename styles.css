@@ -1,4 +1,4 @@
-:root {
+、:root {
     --bg-color: #ffffff;
     --text-color: #333333;
     --button-bg: #4CAF50;
@@ -148,6 +148,12 @@ button:hover {
     background-color: var(--main-method-bg);
 }
 
+.ju-xiang-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 input[type="number"], input[type="text"] {
     width: calc(33.33% - 10px);
     padding: 10px;
@@ -157,7 +163,7 @@ input[type="number"], input[type="text"] {
     box-sizing: border-box;
 }
 
-#result, #gong-details {
+#result, #gong-details, #san-gong-ju-xiang {
     background-color: var(--result-bg);
     padding: 20px;
     margin-top: 20px;
@@ -260,59 +266,42 @@ input[type="number"], input[type="text"] {
     background-color: #FF8C00;
 }
 
-.bagua-info {
-    background-color: var(--result-bg);
-    padding: 20px;
-    margin-top: 20px;
-    border-radius: 5px;
-}
-
-.bagua-lines {
+.ju-xiang-pan {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
-.bagua-line {
-    font-size: 24px;
-    line-height: 1.2;
+.ju-xiang-label {
     font-weight: bold;
+    margin-right: 10px;
+    min-width: 50px;
 }
 
-.bagua-line.阳 {
-    color: #FF4500;
-}
-
-.bagua-line.阴 {
-    color: #1E90FF;
-}
-
-/* 调整八卦具象显示效果 */
-.bagua-symbol {  
-    font-size: 18px;
-    text-align: left;
-    margin: 10px 0;
+.ju-xiang-pan-name {
     font-weight: bold;
-    color: inherit; /* 使用继承的颜色，而不是在 JavaScript 中设置 */
-}
-
-/* 为八卦符号单独设置样式 */
-.bagua-symbol::first-letter {
-    font-size: 20px; /* 保持八卦符号较大 */
-    vertical-align: middle;
-}
-
-.bagua-name {
-    font-size: 18px;
-    font-weight: bold;
+    margin-right: 20px;
+    min-width: 60px;
+    background-color: #4a4a4a;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
     text-align: center;
-    margin-bottom: 10px;
 }
 
-.bagua-meaning {
-    font-size: 14px;
-    text-align: justify;
+/*.ju-xiang-pan-name {
+    font-weight: bold;
+    margin-right: 20px;
+    min-width: 60px;
+    background-color: #4a4a4a;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-align: center;
+}*/
+
+.ju-xiang-gong-container {
+    display: flex;
 }
 
 .centered-text {
@@ -320,6 +309,63 @@ input[type="number"], input[type="text"] {
     margin: 15px 0;
     font-weight: bold;
 }
+
+.dark-mode .ju-xiang-header {
+    background-color: #666666;
+}
+
+.dark-mode .ju-xiang-pan-name {
+    background-color: #666666;
+}
+
+.ju-xiang-gong {
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+    height: 20px;
+    line-height: 20px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.ju-xiang-bagua-info {
+    flex-grow: 1;
+}
+
+/*.ju-xiang-bagua-info {
+    margin-left: 20px;
+}*/
+
+.ju-xiang-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.ju-xiang-header {
+    background-color: #4a4a4a;
+    color: white;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+#tian-pan, #di-pan, #ren-pan {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.ju-xiang-content {
+    display: flex;
+    flex-grow: 1;
+}
+
+/*.ju-xiang-content {
+    display: flex;
+    gap: 10px;
+}*/
 
 @media (max-width: 600px) {
     .container {
@@ -357,7 +403,7 @@ input[type="number"], input[type="text"] {
         justify-content: space-between;
     }
 
-    .nav-button {
+.nav-button {
         padding: 4px 8px;
         font-size: 12px;
         margin: 0 8px;
@@ -369,5 +415,35 @@ input[type="number"], input[type="text"] {
         padding: 15px;
     }
 
+    .ju-xiang-pan {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .ju-xiang-label {
+        margin-bottom: 5px;
+    }
+
+    .ju-xiang-gong-container {
+        display: flex;
+        margin-right: 20px;
+    } 
+
+    /*.ju-xiang-gong-container {
+        flex-wrap: wrap;
+    }*/
+
+    .ju-xiang-gong {
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-right: 5px;
+        min-width: 40px;
+        text-align: center;
+    }
+
+    /*.ju-xiang-gong {
+        margin-bottom: 5px;
+    }*/
 
 }
