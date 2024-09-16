@@ -523,7 +523,7 @@ document.getElementById('restart').addEventListener('click', () => {
 const themeToggle = document.getElementById('theme-toggle');
 themeToggle.addEventListener('click', () => {
     document.body.classList.toggle('dark-mode');
-    themeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀' : '🌙';
+    themeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
 });
 
 // 初始化
@@ -572,13 +572,13 @@ document.getElementById('announcement-btn').addEventListener('click', function()
 });
 
 document.getElementById('learn-btn').addEventListener('click', function() {
-    // 跳转到学习页面
-    window.location.href = 'https://wangcy.cam/cd72ba646fea4e0fb3824581c88a023e';
+    // 在新标签页打开学习页面
+    window.open('https://wangcy.cam/cd72ba646fea4e0fb3824581c88a023e', '_blank');
 });
 
 document.getElementById('donate-btn').addEventListener('click', function() {
-    // 跳转到打赏页面
-    window.location.href = 'https://donate.wangcy.site/';
+    // 在新标签页打开打赏页面
+    window.open('https://donate.wangcy.site/', '_blank');
 });
 
 // 新增：处理模态框关闭
