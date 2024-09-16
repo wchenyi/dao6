@@ -424,6 +424,38 @@ document.getElementById('month-day-hour').addEventListener('click', () => {
     showResult(result, '月-日-时起卦', [month, day, shichenIndex]);
 });
 
+// 获取时辰对应的数字
+function getShichenNumber(hour) {
+    const shichenMap = {
+        23: 1, 0: 1, 1: 2, 2: 2, 3: 3, 4: 3, 5: 4, 6: 4, 7: 5, 8: 5, 9: 6, 10: 6,
+        11: 7, 12: 7, 13: 8, 14: 8, 15: 9, 16: 9, 17: 10, 18: 10, 19: 11, 20: 11, 21: 12, 22: 12
+    };
+    let T = shichenMap[hour];
+    return T > 6 ? T % 6 || 1 : T;
+}
+
+// 获取刻对应的数字
+function getKeNumber(hour, minute) {
+    const totalMinutes = hour % 2 === 0 ? minute : minute + 60;
+    let K;
+    if ([0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22].includes(hour)) {
+        K = Math.floor(totalMinutes / 15) + 4;
+    } else {
+        K = Math.floor(totalMinutes / 15);
+    }
+    K = K === 0 ? 1 : K;
+    return K > 6 ? K % 6 || 1 : K;
+}
+
+// 获取分对应的数字
+function getMinuteNumber(hour, minute) {
+    if ([1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23].includes(hour) && minute >= 0 && minute <= 14) {
+        return minute === 0 ? 1 : minute;
+    }
+    const M = minute % 15 || 1;
+    return M;
+}
+
 // 时-刻-分起卦
 document.getElementById('hour-ke-minute').addEventListener('click', () => {
     const now = new Date();
@@ -434,30 +466,23 @@ document.getElementById('hour-ke-minute').addEventListener('click', () => {
     const K = getKeNumber(hour, minute);
     const M = getMinuteNumber(hour, minute);
     
-    const result = calculateDivination(T, K, M);
-    showResult(result, '时-刻-分起卦', [T, K, M]);
+    const S = ((T - 1 + K - 1) % 6) + 1;
+    const humanGong = ((K - 1 + S - 1) % 6) + 1;
+    
+    const result = {
+        tianGong: gongs[T - 1],
+        diGong: gongs[S - 1],
+        renGong: gongs[humanGong - 1]
+    };
+    
+    const shichen = getShichen(hour);
+    showResult(result, `时-刻-分起卦 | ${shichen}时`, [T, K, M]);
 });
 
-function getShichenNumber(hour) {
-    const shichen = Math.floor(hour / 2) + 1;
-    return shichen > 12 ? shichen - 12 : shichen;
-}
-
-function getKeNumber(hour, minute) {
-    const totalMinutes = hour % 2 === 0 ? minute : minute + 60;
-    if (totalMinutes < 15) return 1;
-    const ke = Math.floor(totalMinutes / 15) + 1;
-    return ke > 7 ? 7 : ke;
-}
-
-function getMinuteNumber(hour, minute) {
-    if (hour % 2 === 1 && minute >= // ... (接上一部分)
-
-    0 && minute <= 14) {
-        return minute === 0 ? 1 : minute;
-    }
-    const remainder = minute % 15;
-    return remainder === 0 ? 1 : remainder;
+// 获取时辰名称
+function getShichen(hour) {
+    const shichenNames = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'];
+    return shichenNames[Math.floor(((hour + 1) % 24) / 2)];
 }
 
 // 随机数字起卦
