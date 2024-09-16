@@ -454,7 +454,7 @@ function getMinuteNumber(hour, minute) {
         return minute === 0 ? 1 : minute;
     }
     const M = minute % 15 || 1;
-    return M;
+    return M > 6 ? M % 6 || 1 : M;
 }
 
 // 时-刻-分起卦
