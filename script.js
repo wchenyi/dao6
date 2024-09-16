@@ -149,7 +149,7 @@ function getRelation(gong1, gong2) {
 // 获取体用关系
 function getBodyUseRelation(body, use) {
     if (body.element === use.element) {
-        return body.yinYang === use.yinYang ? '比肩' : '比助';
+        return body.yinYang === use.yinYang ? '比劫' : '比助';
     }
     const relation = wuxingRelations[body.element][use.element];
     switch (relation) {
