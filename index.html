@@ -5,13 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>道家小六壬起卦</title>
     <link rel="stylesheet" href="styles.css">
-    <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "o3mul79njn");
-</script>
 </head>
 <body>
     <nav class="top-nav">
@@ -25,19 +18,17 @@
     <!-- 公告弹窗 -->
     <div id="announcement-modal" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
+            <span class="close">×</span>
             <h2>📢公告</h2>
-            <p>这里是Wangcy制作的道家小六壬起卦网站，目前还在开发中，下面是基本功能和注意事项：<br>
-               版本号：<u>v1.1</u>，<a href="https://wang01116.github.io/dao6">备用网站</a></p>
+             <p>这里是Wangcy制作的道家小六壬起卦网站，目前还在开发中，下面是基本功能和注意事项：<br>
+               版本号：<u>v1.2</u></p>
             <p class="centered-text">☯️<b>功能介绍</b></p>
-            <p>🎁<b>起卦方法：<br>
-               1️⃣<b>时间起卦：</b> <br><u>农历：月-日-时起卦</u>和<u>时-刻-分起卦</u><br>
-               2️⃣<b>数字起卦：</b> <br><u>自选数字起卦</u>和<u>随机数字起卦</u><br>
-               3️⃣<b>自选起卦：</b> <br>自己输入三宫的六神<br>
-               🎁<b>小六学习：</b> <br>提供资料、案例、分析交流<br>
-               🎁<b>小六技法：</b> <br><u>八卦具象</u>、<u>三宫具象</u><br>
-               🎁<b>五行色块：<br>
-                </b>金🟡、木🟢、水🔵、火🔴、土🟤</p>
+            <p>1️⃣<b>时间起卦：</b><u>农历月日时起卦</u>和<u>时刻分起卦</u>（正常可用✔️）<br>
+               2️⃣<b>数字起卦：</b><u>自选数字起卦</u>和<u>随机数字起卦</u>（正常可用✔️）<br>
+               3️⃣<b>自选起卦：</b>自己输入三宫（正常可用✔️）<br>
+               4️⃣<b>道家小六学习：</b>提供资料、案例、分析交流<br>
+               5️⃣<b>技法：</b><u>八卦具象（正常可用✔️）</u>、<u>三宫具象</u><br>
+               6️⃣<b>五行：</b>金（金色）、木（绿色）、水（蓝色）、火（红色）、土（棕色）</p>
             <p class="centered-text"><b>🎁计划增加</b></p>
             <p>1️⃣转太极</p>
             <p class="centered-text">🧩欢迎你的建议……</p>
@@ -50,7 +41,6 @@
 
         <div id="current-time"></div>
         <div id="lunar-time"></div>
-        <!-- <p>本网站于2025年2月到期，<b>新站点：</b><u>dao6.us.kg</u></p>-->
 
         <h2>选择起卦方式</h2>
         <div class="divination-methods">
@@ -73,14 +63,14 @@
             <input type="number" class="custom-input" placeholder="天数 (1-100)">
             <input type="number" class="custom-input" placeholder="地数 (1-100)">
             <input type="number" class="custom-input" placeholder="人数 (1-100)">
-            <button id="custom-number-submit">起卦</button>
+            <button id="custom-number-submit">提交</button>
         </div>
 
-        <div id="custom-gong-input" style="display: none;">
+         <div id="custom-gong-input" style="display: none;">
             <input type="text" class="custom-gong" placeholder="请输入天宫">
             <input type="text" class="custom-gong" placeholder="请输入地宫">
             <input type="text" class="custom-gong" placeholder="请输入人宫">
-            <button id="custom-gong-submit">起卦</button>
+            <button id="custom-gong-submit">提交</button>
         </div>
 
         <div id="result" style="display: none;">
@@ -89,26 +79,31 @@
                 <div class="result-header">天宫</div>
                 <div class="result-header">地宫</div>
                 <div class="result-header">人宫</div>
-                <div class="result-header">时辰</div>
+                 <div class="result-header">时辰</div>
                 <div id="tian-gong" class="gong"></div>
                 <div id="di-gong" class="gong"></div>
                 <div id="ren-gong" class="gong"></div>
                 <div id="shi-chen"></div>
             </div>
-            <div id="divination-method"></div>
+             <div id="divination-method"></div>
             <div id="used-numbers"></div>
             <div id="relations"></div>
             <div id="fortune"></div>
         </div>
 
-        <div id="gong-details" style="display: none;">
-            <h3>宫位详情</h3>
+         <div id="bagua-result" style="display: none;">
+            <h3>八卦具象</h3>
+             <div id="bagua-info"></div>
+        </div>
+
+         <div id="gong-meanings" style="display: none;">
+            <h3>六神含义</h3>
         </div>
 
         <div id="san-gong-ju-xiang" style="display: none;">
             <h3>三宫具象</h3>
             <div class="ju-xiang-container">
-                <div class="ju-xiang-item">
+               <div class="ju-xiang-item">
                     <div class="ju-xiang-header">天盘：</div>
                     <div id="tian-pan" class="ju-xiang-content"></div>
                 </div>
@@ -116,11 +111,16 @@
                     <div class="ju-xiang-header">地盘：</div>
                     <div id="di-pan" class="ju-xiang-content"></div>
                 </div>
-                <div class="ju-xiang-item">
+                 <div class="ju-xiang-item">
                     <div class="ju-xiang-header">人盘：</div>
                     <div id="ren-pan" class="ju-xiang-content"></div>
                 </div>
             </div>
+        </div>
+
+
+        <div id="gong-details" style="display: none;">
+            <h3>宫位详情</h3>
         </div>
 
         <button id="restart" class="restart-button" style="display: none;">重新起卦</button>
