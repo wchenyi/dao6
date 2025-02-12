@@ -149,7 +149,7 @@ window.addEventListener('click', (event) => {
 });
 // 学习和打赏跳转
 learnBtn.addEventListener('click', () => {
-   window.location.href = 'https://wangcy.cam/cd72ba646fea4e0fb3824581c88a023e'; // 替换为你的学习链接
+   window.location.href = 'https://wangcy.my/cd72ba646fea4e0fb3824581c88a023e'; // 替换为你的学习链接
 });
 
 donateBtn.addEventListener('click', () => {
